@@ -1,0 +1,272 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+<style>
+
+/* 
+General CSS style
+*/
+HTML  CSS   Result
+Edit on 
+    
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+    
+body {
+  margin: 20px;
+  color: #435757; 
+  /* 
+  OPTIONAL: To add a Background image, uncomment the 2 lines below and upload the image into the Meraki theme.
+    
+  background-image: url("Guest_Background.jpeg");
+  background-repeat: no-repeat;
+ */
+  background-color: #ffffff;
+  font: 1.2em/1 'Noto Sans', sans-serif;
+}
+
+.table { width: 100%; }
+#title_cell { vertical-align: bottom; }
+#icon_cell { text-align: right; }
+
+    
+h1 {
+  margin: 0;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #fff;
+  line-height: 1.2;
+  font-size: 1.8em;
+  font-weight: normal;
+  text-align: center;
+  color: #000000;
+}
+
+h1 span {
+  font-size: .7em;
+  text-align: center;
+}
+
+/* 
+This CSS section specifies the Container, the Checkbox and Internet Access button
+*/
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 10px 20px 40px;
+  color: #000000;
+  border: 1px solid #000000;
+  background-color: #cccccc
+}
+    
+section {
+  margin-top: 30px;
+}
+
+section::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.top-label {
+  display: block;
+  margin: 10px 0;
+}
+
+
+input[type="checkbox"], input[type="radio"] {
+  position: absolute;
+  left: -9999px;
+}
+
+.side-label {
+  display: block;
+  position: relative;
+  margin: 10px 0;
+  padding-left: 35px;
+  cursor: pointer;
+}
+
+.side-label::before, .side-label::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+
+.side-label::before {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #fff;  
+}
+
+input:focus + .side-label::before {
+  border-color: #9ab593;
+}
+
+.side-label::after {
+  display: none;
+  width: 12px;
+  height: 12px;
+  margin: 4px;
+  background-color: #000000;
+}
+
+input:checked + .side-label::after {
+  display: block;
+}
+
+
+.blocked {
+  margin-top: 40px;
+  color: #000000;
+  text-align: center;
+}
+
+
+/* 
+This "a" attribute defines the button that says "Click for Internet access". Due to an HTML limitation the Tag Button cannot be used, therefore we're using this tag.
+*/
+a {
+  display: none;
+  max-width: 230px;
+  margin: 40px auto 0;
+  padding: 10px 40px;
+  border: 2px solid #fff;
+  color: rgba(0, 0, 0, .8);
+  background-color: #999999;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#permitted:checked ~ .blocked {
+  display: none;
+}
+
+#permitted:checked ~ a {
+  display: block;
+}
+
+
+/* 
+This CSS section specifies everything related to the Collapsible Wrapper for the Terms and Conditions.  
+*/
+
+.wrap-collabsible {
+  margin-bottom: 1.2rem 0;
+}
+
+input[type='checkbox'] {
+  display: none;
+}
+
+.lbl-toggle {
+  display: block;
+
+  font-weight: bold;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  text-align: center;
+
+  padding: 1rem;
+
+  color: #000000;
+  background: #ffffff;
+
+  cursor: pointer;
+
+  border-radius: 7px;
+  transition: all 0.25s ease-out;
+}
+
+.lbl-toggle:hover {
+  color: #cccccc;
+}
+
+.lbl-toggle::before {
+  content: ' ';
+  display: inline-block;
+
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid currentColor;
+  vertical-align: middle;
+  margin-right: .7rem;
+  transform: translateY(-2px);
+  transition: transform .2s ease-out;
+}
+
+.toggle:checked + .lbl-toggle::before {
+  transform: rotate(90deg) translateX(-3px);
+}
+
+.collapsible-content {
+  max-height: 0px;
+  overflow: hidden;
+  transition: max-height .25s ease-in-out;
+}
+
+.toggle:checked + .lbl-toggle + .collapsible-content {
+  max-height: 350px;
+}
+
+.toggle:checked + .lbl-toggle {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.collapsible-content .content-inner {
+  background: rgba(250, 224, 66, .2);
+  border-bottom: 1px solid rgba(250, 224, 66, .45);
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+  padding: .5rem 1rem;
+  font-size: 1rem;
+}    
+    
+</style>
+</head>
+    
+    
+<body>
+<div class="container">
+<table>
+<tr>
+     <td>$MERAKI:NETWORK_LOGO_IMG_TAG$</td>
+     <td id="title_cell"><h1>Welcome to our Guest WiFi</h1></td>
+</tr>
+</table>
+  
+  <section>
+      <div>Please accept the Terms and Conditions</div>
+      <br>
+      <div class="wrap-collabsible">
+  <input id="collapsible" class="toggle" type="checkbox">
+  <label for="collapsible" class="lbl-toggle">Please accept the Terms and Conditions</label>
+  <div class="collapsible-content">
+    <div class="content-inner">
+      <p>
+        This is an EXAMPLE of Term and Conditions... 
+        Guests are responsible for their own connections, and our Support Center cannot assist individual guests to configure their notepads, laptops, or mobile devices. Under no circumstances are unlawful or inappropriate activities allowed. Access may be monitored, and use of this connection constitutes a consent to be monitored. We have no responsibility for, or control over, the Internet Services you access and do not guarantee that any services are error or virus free. Use of wi-fi Internet services is carried out entirely at your own risk.
+      </p>
+    </div>
+  </div>
+</div>
+    <input id="permitted" type="checkbox">
+      <label for="permitted" class="side-label">Yes, I accept</label>
+    <div class="blocked">(please accept the terms to continue)</div>
+    <a href="$MERAKI:AUTH_AND_CONTINUE_URL$">Click for Internet access</a>
+  </section>
+</div>
+</body>
+</html>
